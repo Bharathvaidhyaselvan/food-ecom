@@ -583,10 +583,10 @@
             <div class="admin-sidebar">
                 <div class="admin-profile">
                     <div class="admin-avatar">
-                        <img src="../images/admin-avatar.jpg" alt="Admin Avatar">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNF5LYFfMZ4ttGsBmZ6Y7eeV3lcvMB3NBV3w&s" alt="Admin Avatar">
                     </div>
-                    <h3 class="admin-name">John Doe</h3>
-                    <p class="admin-role">Administrator</p>
+                    <h3 class="admin-name">Admin Name here</h3>
+                    <p class="admin-role">Registration No.</p>
                 </div>
                 <div class="admin-menu">
                     <ul>
@@ -744,7 +744,7 @@
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2023 iFood. All Rights Reserved.</p>
+                <p>&copy; 2025 iFood. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
@@ -762,63 +762,15 @@
             }
         });
         
-        // Sample products data (replace with your actual data source)
-        const products = [
-            {
-                id: 1,
-                name: "Classic Burger",
-                category: "burger",
-                price: 8.99,
-                description: "Juicy beef patty with lettuce, tomato, and special sauce.",
-                image: "../images/products/burger1.jpg",
-                status: "active"
-            },
-            {
-                id: 2,
-                name: "Pepperoni Pizza",
-                category: "pizza",
-                price: 12.99,
-                description: "Traditional pizza with pepperoni, mozzarella, and tomato sauce.",
-                image: "../images/products/pizza1.jpg",
-                status: "active"
-            },
-            {
-                id: 3,
-                name: "Caesar Salad",
-                category: "salad",
-                price: 7.99,
-                description: "Fresh romaine lettuce with Caesar dressing, croutons, and parmesan.",
-                image: "../images/products/salad1.jpg",
-                status: "active"
-            },
-            {
-                id: 4,
-                name: "Chocolate Cake",
-                category: "dessert",
-                price: 5.99,
-                description: "Rich chocolate cake with a layer of ganache.",
-                image: "../images/products/dessert1.jpg",
-                status: "inactive"
-            },
-            {
-                id: 5,
-                name: "Spaghetti Carbonara",
-                category: "pasta",
-                price: 10.99,
-                description: "Spaghetti with creamy sauce, bacon, and parmesan cheese.",
-                image: "../images/products/pasta1.jpg",
-                status: "active"
-            },
-            {
-                id: 6,
-                name: "Iced Coffee",
-                category: "beverage",
-                price: 3.99,
-                description: "Cold brewed coffee served over ice.",
-                image: "../images/products/beverage1.jpg",
-                status: "active"
-            }
-        ];
+        // Fetch products data from JSON file
+        fetch('../products.json')
+            .then(response => response.json())
+            .then(data => {
+                // Save the fetched data to a global variable if needed
+                window.products = data;
+                displayProducts();  // call your function to display products using "window.products"
+            })
+            .catch(error => console.error('Error loading products:', error));
         
         // Variables for pagination
         const productsPerPage = 5;
@@ -828,7 +780,6 @@
         const productsTableBody = document.getElementById('products-table-body');
         const paginationContainer = document.getElementById('pagination');
         const addProductBtn = document.getElementById('add-product-btn');
-        const productModalOverlay = document.getElementById('product-modal-overlay');
         const productModal = document.getElementById('product-modal');
         const closeModalBtn = document.getElementById('close-modal');
         const cancelBtn = document.getElementById('cancel-btn');
@@ -854,7 +805,7 @@
         function displayProducts() {
             const startIndex = (currentPage - 1) * productsPerPage;
             const endIndex = startIndex + productsPerPage;
-            const currentProducts = products.slice(startIndex, endIndex);
+            const currentProducts = window.products.slice(startIndex, endIndex);
             
             productsTableBody.innerHTML = '';
             
@@ -863,9 +814,9 @@
                 
                 row.innerHTML = `
                     <td>
-                        <img src="${product.image}" alt="${product.name}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;">
+                        <img src="${product.image}" alt="${product.title}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;">
                     </td>
-                    <td>${product.name}</td>
+                    <td>${product.title}</td>
                     <td>${product.category.charAt(0).toUpperCase() + product.category.slice(1)}</td>
                     <td>$${product.price.toFixed(2)}</td>
                     <td>
@@ -902,7 +853,7 @@
         
         // Setup pagination
         function setupPagination() {
-            const totalPages = Math.ceil(products.length / productsPerPage);
+            const totalPages = Math.ceil(window.products.length / productsPerPage);
             paginationContainer.innerHTML = '';
             
             for (let i = 1; i <= totalPages; i++) {
@@ -930,12 +881,12 @@
         
         // Open product modal for editing existing product
         function editProduct(productId) {
-            const product = products.find(p => p.id === productId);
+            const product = window.products.find(p => p.id === productId);
             if (!product) return;
             
             modalTitle.textContent = 'Edit Product';
             productIdInput.value = product.id;
-            productNameInput.value = product.name;
+            productNameInput.value = product.title; // updated here from product.name to product.title
             productCategoryInput.value = product.category;
             productPriceInput.value = product.price;
             productDescriptionInput.value = product.description;
@@ -965,14 +916,14 @@
             
             if (productId) {
                 // Update existing product
-                const index = products.findIndex(p => p.id === productId);
+                const index = window.products.findIndex(p => p.id === productId);
                 if (index !== -1) {
-                    products[index] = { ...products[index], ...productData };
+                    window.products[index] = { ...window.products[index], ...productData };
                 }
             } else {
                 // Add new product
-                const newId = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
-                products.push({
+                const newId = window.products.length > 0 ? Math.max(...window.products.map(p => p.id)) + 1 : 1;
+                window.products.push({
                     id: newId,
                     ...productData
                 });
@@ -996,10 +947,10 @@
         // Delete product
         function deleteProduct() {
             const productId = parseInt(deleteProductIdInput.value);
-            const index = products.findIndex(p => p.id === productId);
+            const index = window.products.findIndex(p => p.id === productId);
             
             if (index !== -1) {
-                products.splice(index, 1);
+                window.products.splice(index, 1);
                 displayProducts();
             }
             
@@ -1037,9 +988,6 @@
                 closeDeleteModal();
             }
         });
-        
-        // Initialize the page
-        displayProducts();
     </script>
 </body>
 </html>

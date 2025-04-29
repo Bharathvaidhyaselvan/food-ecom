@@ -608,10 +608,11 @@
                 <div class="admin-sidebar">
                     <div class="admin-profile">
                         <div class="admin-avatar">
-                            <img src="/placeholder.svg?height=80&width=80" alt="Admin Avatar">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNF5LYFfMZ4ttGsBmZ6Y7eeV3lcvMB3NBV3w&s" alt="Admin Avatar">
                         </div>
-                        <h3 class="admin-name">Admin User</h3>
-                        <p class="admin-role">Administrator</p>
+                        <h3 class="admin-name">Name Here</h3>
+
+                        <p class="admin-role">Registration No.</p>
                     </div>
                     <div class="admin-menu">
                         <ul>
@@ -718,7 +719,7 @@
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2023 iFood. All Rights Reserved.</p>
+                <p>&copy; 2025 iFood. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
@@ -736,26 +737,23 @@
             }
         });
         
-        // Load categories from localStorage or initialize with default categories
+        // Default Indian-themed categories
+        const defaultCategories = [
+            { id: 1, title: 'Breakfast', image: 'https://southindianstore.com/wp-content/uploads/2018/06/breakfast-2408818_1920.jpg', featured: true, active: true },
+            { id: 2, title: 'South Indian', image: 'https://media.istockphoto.com/id/1292563627/photo/assorted-south-indian-breakfast-foods-on-wooden-background-ghee-dosa-uttappam-medhu-vada.jpg?s=612x612&w=0&k=20&c=HvuYT3RiWj5YsvP2_pJrSWIcZUXhnTKqjKhdN3j_SgY=', featured: true, active: true },
+            { id: 3, title: 'Snacks', image: 'https://yummy-valley.com/wp-content/uploads/2024/03/Murukku.webp', featured: false, active: true },
+            { id: 4, title: 'Desserts', image: 'https://www.tasteofhome.com/wp-content/uploads/2021/01/Besan-Laddu-IMG_205510-scaled-Square-courtesy-eat-more-art-by-sonal.jpg?fit=700%2C700', featured: false, active: true },
+            { id: 5, title: 'Beverages', image: 'https://www.tastingtable.com/img/gallery/21-indian-drinks-you-need-to-try-at-least-once/chaas-1718799368.jpg', featured: true, active: true }
+        ];
+        
+        // Always update localStorage with defaultCategories on page load (remove stored data)
+        localStorage.setItem('admin_categories', JSON.stringify(defaultCategories));
+        
+        // Fetch categories from localStorage (will be your new defaults)
         function loadCategories() {
-            const storedCategories = localStorage.getItem('admin_categories');
-            if (storedCategories) {
-                return JSON.parse(storedCategories);
-            } else {
-                // Default categories
-                const defaultCategories = [
-                    { id: 1, title: 'Main Course', image: '/placeholder.svg?height=400&width=600', featured: true, active: true },
-                    { id: 2, title: 'Appetizers', image: '/placeholder.svg?height=400&width=600', featured: true, active: true },
-                    { id: 3, title: 'Desserts', image: '/placeholder.svg?height=400&width=600', featured: false, active: true },
-                    { id: 4, title: 'Beverages', image: '/placeholder.svg?height=400&width=600', featured: false, active: true },
-                    { id: 5, title: 'Specials', image: '/placeholder.svg?height=400&width=600', featured: true, active: true }
-                ];
-                localStorage.setItem('admin_categories', JSON.stringify(defaultCategories));
-                return defaultCategories;
-            }
+            return JSON.parse(localStorage.getItem('admin_categories'));
         }
         
-        // Save categories to localStorage
         function saveCategories(categories) {
             localStorage.setItem('admin_categories', JSON.stringify(categories));
         }

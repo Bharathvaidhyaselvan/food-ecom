@@ -1,98 +1,122 @@
 [
     {
-      "id": 1,
-      "title": "Margherita Pizza",
-      "description": "Classic pizza with tomato sauce, mozzarella cheese, and fresh basil leaves.",
-      "price": 12.99,
-      "rating": 4.5,
-      "image": "/placeholder.svg?height=400&width=600"
+        "id": 1,
+        "title": "Idli",
+        "description": "Steamed rice cakes served with sambar and coconut chutney.",
+        "price": 2.99,
+        "rating": 4.5,
+        "category": "breakfast",
+        "status": "active",
+        "image": "https://www.awesomecuisine.com/wp-content/uploads/2007/11/Idli-with-sambar-and-chutney.jpg"
     },
     {
-      "id": 2,
-      "title": "Chicken Alfredo Pasta",
-      "description": "Creamy alfredo sauce with grilled chicken and fettuccine pasta.",
-      "price": 14.99,
-      "rating": 4.7,
-      "image": "/placeholder.svg?height=400&width=600"
+        "id": 2,
+        "title": "Masala Dosa",
+        "description": "Crispy rice crepe filled with spiced potato, served with chutney and sambar.",
+        "price": 4.99,
+        "rating": 4.7,
+        "category": "south indian",
+        "status": "active",
+        "image": "https://i0.wp.com/www.nandanmsd.com/wp-content/uploads/2020/08/Masala-Dosa.jpg?fit=1280%2C720&ssl=1"
     },
     {
-      "id": 3,
-      "title": "Beef Burger",
-      "description": "Juicy beef patty with cheese, lettuce, tomato, and special sauce on a brioche bun.",
-      "price": 10.99,
-      "rating": 4.6,
-      "image": "/placeholder.svg?height=400&width=600"
+        "id": 3,
+        "title": "Medu Vada",
+        "description": "Light and crispy lentil donuts paired with sambar and coconut chutney.",
+        "price": 3.99,
+        "rating": 4.6,
+        "category": "south indian",
+        "status": "active",
+        "image": "https://bonmasala.com/wp-content/uploads/2022/12/medu-vada-recipe.webp"
     },
     {
-      "id": 4,
-      "title": "Vegetable Stir Fry",
-      "description": "Fresh vegetables stir-fried with tofu in a savory sauce, served with steamed rice.",
-      "price": 11.99,
-      "rating": 4.3,
-      "image": "/placeholder.svg?height=400&width=600"
+        "id": 4,
+        "title": "Uttapam",
+        "description": "Thick rice pancake topped with tomatoes, onions, and green chilies.",
+        "price": 5.99,
+        "rating": 4.3,
+        "category": "south indian",
+        "status": "active",
+        "image": "https://bakinghermann.com/wp-content/uploads/2024/02/Uttapam-1.jpg"
     },
     {
-      "id": 5,
-      "title": "Grilled Salmon",
-      "description": "Fresh salmon fillet grilled to perfection, served with seasonal vegetables.",
-      "price": 16.99,
-      "rating": 4.8,
-      "image": "/placeholder.svg?height=400&width=600"
+        "id": 5,
+        "title": "Pongal",
+        "description": "Savory dish of rice and yellow moong dal tempered with cumin and ghee.",
+        "price": 6.99,
+        "rating": 4.8,
+        "category": "south indian",
+        "status": "active",
+        "image": "https://bonmasala.com/wp-content/uploads/2022/12/pongal-recipe.webp"
     },
     {
-      "id": 6,
-      "title": "Caesar Salad",
-      "description": "Crisp romaine lettuce with Caesar dressing, croutons, and parmesan cheese.",
-      "price": 8.99,
-      "rating": 4.2,
-      "image": "/placeholder.svg?height=400&width=600"
+        "id": 6,
+        "title": "Upma",
+        "description": "Semolina porridge cooked with vegetables and seasoned with mustard seeds.",
+        "price": 4.49,
+        "rating": 4.2,
+        "category": "breakfast",
+        "status": "active",
+        "image": "https://myfoodstory.com/wp-content/uploads/2022/11/Vegetable-Upma-4.jpg"
     },
     {
-      "id": 7,
-      "title": "Chicken Biryani",
-      "description": "Fragrant basmati rice cooked with tender chicken pieces and aromatic spices.",
-      "price": 13.99,
-      "rating": 4.7,
-      "image": "/placeholder.svg?height=400&width=600"
+        "id": 7,
+        "title": "Bisi Bele Bath",
+        "description": "Hearty spicy rice dish with lentils and mixed vegetables in tamarind gravy.",
+        "price": 7.99,
+        "rating": 4.7,
+        "category": "south indian",
+        "status": "active",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/0/04/Bisi_Bele_Bath_%28Bisibelebath%29.JPG"
     },
     {
-      "id": 8,
-      "title": "Mushroom Risotto",
-      "description": "Creamy Italian rice dish cooked with mushrooms, white wine, and parmesan cheese.",
-      "price": 12.49,
-      "rating": 4.4,
-      "image": "/placeholder.svg?height=400&width=600"
+        "id": 8,
+        "title": "Rava Dosa",
+        "description": "Crispy semolina crepe served with coconut chutney and sambar.",
+        "price": 5.49,
+        "rating": 4.4,
+        "category": "south indian",
+        "status": "active",
+        "image": "https://vegecravings.com/wp-content/uploads/2023/07/Rava-Dosa-Recipe-Step-By-Step-Instructions-scaled.jpg.webp"
     },
     {
-      "id": 9,
-      "title": "Fish and Chips",
-      "description": "Crispy battered fish served with golden fries and tartar sauce.",
-      "price": 11.49,
-      "rating": 4.3,
-      "image": "/placeholder.svg?height=400&width=600"
+        "id": 9,
+        "title": "Bajjji",
+        "description": "Crispy assorted vegetable fritters—a popular South Indian snack.",
+        "price": 3.49,
+        "rating": 4.3,
+        "category": "snacks",
+        "status": "active",
+        "image": "https://www.vegrecipesofindia.com/wp-content/uploads/2009/09/banana-bajji-recipe-1.jpg"
     },
     {
-      "id": 10,
-      "title": "Chocolate Lava Cake",
-      "description": "Warm chocolate cake with a molten chocolate center, served with vanilla ice cream.",
-      "price": 6.99,
-      "rating": 4.9,
-      "image": "/placeholder.svg?height=400&width=600"
+        "id": 10,
+        "title": "Filter Coffee",
+        "description": "Rich, aromatic South Indian filter coffee made with freshly roasted beans.",
+        "price": 2.99,
+        "rating": 4.9,
+        "category": "beverages",
+        "status": "active",
+        "image": "https://www.saffrontrail.com/wp-content/uploads/2006/08/recipe-to-make-filter-kaapi-how-to.1024x1024-1.jpg"
     },
     {
-      "id": 11,
-      "title": "Chicken Shawarma",
-      "description": "Marinated chicken wrapped in pita bread with garlic sauce and fresh vegetables.",
-      "price": 9.99,
-      "rating": 4.5,
-      "image": "/placeholder.svg?height=400&width=600"
+        "id": 11,
+        "title": "Puliogare",
+        "description": "Tangy tamarind rice mixed with spices and peanuts—a South Indian classic.",
+        "price": 4.99,
+        "rating": 4.5,
+        "category": "south indian",
+        "status": "active",
+        "image": "https://healthy-indian.com/wp-content/uploads/2023/04/20230226_121628.jpg"
     },
     {
-      "id": 12,
-      "title": "Vegetable Lasagna",
-      "description": "Layers of pasta, vegetables, tomato sauce, and cheese baked to perfection.",
-      "price": 13.49,
-      "rating": 4.4,
-      "image": "/placeholder.svg?height=400&width=600"
+        "id": 12,
+        "title": "Sambar",
+        "description": "A hearty lentil stew with vegetables and tamarind, served hot with idli or dosa.",
+        "price": 5.99,
+        "rating": 4.6,
+        "category": "south indian",
+        "status": "active",
+        "image": "https://www.vegrecipesofindia.com/wp-content/uploads/2017/10/sambar-rice-recipe-1a.jpg"
     }
-  ]
+]
