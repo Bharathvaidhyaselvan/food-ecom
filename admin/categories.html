@@ -4,9 +4,604 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Categories - iFood Admin</title>
-    <link rel="stylesheet" href="../styles.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #0a2463; /* Dark Blue */
+            --accent-color: #ffd100; /* Yellow */
+            --text-color: #333;
+            --light-text: #fff;
+            --bg-light: #f8f9fa;
+            --bg-dark: #0a1a3a;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            overflow-x: hidden;
+            color: var(--text-color);
+            background-color: var(--bg-light);
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            font-weight: 600;
+            padding: 10px 25px;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-color);
+            color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--primary-color);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--primary-color);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo h1 {
+            color: var(--light-text);
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: var(--accent-color);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: center;
+            flex: 1;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+        }
+        
+        nav ul li {
+            margin: 0 15px;
+        }
+        
+        nav ul li a {
+            color: var(--light-text);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: var(--transition);
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .admin-btn {
+            color: var(--primary-color);
+            background-color: var(--accent-color);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .admin-btn:hover {
+            background-color: var(--light-text);
+        }
+        
+        .mobile-menu {
+            display: none;
+            color: var(--light-text);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Admin Dashboard Styles */
+        .admin-section {
+            padding: 60px 0;
+            background-color: var(--bg-light);
+        }
+        
+        .admin-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 30px;
+        }
+        
+        .admin-sidebar {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            height: fit-content;
+        }
+        
+        .admin-profile {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .admin-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            overflow: hidden;
+            border: 3px solid var(--accent-color);
+        }
+        
+        .admin-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .admin-name {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .admin-role {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .admin-menu ul li {
+            margin-bottom: 10px;
+        }
+        
+        .admin-menu ul li a {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+        
+        .admin-menu ul li a:hover, .admin-menu ul li a.active {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .admin-menu-icon {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .admin-content {
+            background-color: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+        }
+        
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .admin-title {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+        }
+        
+        .admin-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .admin-table th, .admin-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .admin-table th {
+            background-color: var(--bg-light);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .admin-table tr:hover {
+            background-color: var(--bg-light);
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .status-pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-delivered {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .status-cancelled {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .action-btn {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--primary-color);
+            transition: var(--transition);
+            margin-right: 10px;
+        }
+        
+        .action-btn:hover {
+            color: var(--accent-color);
+        }
+        
+        .admin-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .admin-form .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .admin-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .admin-form .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        .admin-form .form-control:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+        
+        .admin-form select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1em;
+        }
+        
+        .admin-form .checkbox-group {
+            display: flex;
+            align-items: center;
+        }
+        
+        .admin-form .checkbox-group input {
+            margin-right: 10px;
+        }
+        
+        .admin-form .btn {
+            margin-top: 20px;
+        }
+        
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+        
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+        
+        .modal-content {
+            background-color: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .modal-header h2 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: #999;
+            transition: var(--transition);
+        }
+        
+        .close-modal:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Footer Styles */
+        footer {
+            background-color: var(--bg-dark);
+            color: var(--light-text);
+            padding: 60px 0 20px;
+            margin-top: 60px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .footer-logo span {
+            color: var(--accent-color);
+        }
+        
+        .footer-col h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-col ul li a {
+            transition: var(--transition);
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--accent-color);
+            padding-left: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .admin-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .admin-sidebar {
+                margin-bottom: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary-color);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .admin-table {
+                font-size: 0.9rem;
+            }
+            
+            .admin-table th, .admin-table td {
+                padding: 10px;
+            }
+            
+            .admin-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .admin-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .modal-content {
+                padding: 20px;
+                width: 95%;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Header Section -->
+    <header>
+        <div class="container header-container">
+            <a href="../index.html" class="logo">
+                <h1>i<span>Food</span></h1>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../index.html#about">About Us</a></li>
+                    <li><a href="../products.html">Menu</a></li>
+                    <li><a href="../contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <a href="dashboard.html" class="admin-btn">Admin</a>
+            <div class="mobile-menu">☰</div>
+        </div>
+    </header>
+
     <section class="admin-section">
         <div class="container">
             <div class="admin-container">
@@ -85,7 +680,62 @@
         </div>
     </div>
 
+    <!-- Footer Section -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <h2>i<span>Food</span></h2>
+                    </div>
+                    <p>The best food delivery service in town, bringing your favorite meals right to your doorstep.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../index.html#about">About Us</a></li>
+                        <li><a href="../products.html">Menu</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Refund Policy</a></li>
+                        <li><a href="#">Help</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li>Email: info@ifood.com</li>
+                        <li>Phone: +1 234 567 890</li>
+                        <li>Address: 123 Food Street, Foodville</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 iFood. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
     <script>
+        // Mobile menu functionality
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navMenu = document.querySelector('nav ul');
+        
+        mobileMenu.addEventListener('click', function() {
+            if (navMenu.style.display === 'flex') {
+                navMenu.style.display = 'none';
+            } else {
+                navMenu.style.display = 'flex';
+            }
+        });
+        
         // Load categories from localStorage or initialize with default categories
         function loadCategories() {
             const storedCategories = localStorage.getItem('admin_categories');
@@ -157,9 +807,11 @@
             document.getElementById('category-form').reset();
             document.getElementById('category-id').value = '';
             document.getElementById('category-active').checked = true;
+            document.getElementById('category-image').value = '/placeholder.svg?height=400&width=600';
             
             // Show modal
-            document.getElementById('category-modal').style.display = 'flex';
+            const modal = document.getElementById('category-modal');
+            modal.style.display = 'flex';
         }
         
         // Edit category
@@ -180,7 +832,8 @@
             document.getElementById('category-active').checked = category.active;
             
             // Show modal
-            document.getElementById('category-modal').style.display = 'flex';
+            const modal = document.getElementById('category-modal');
+            modal.style.display = 'flex';
         }
         
         // Delete category

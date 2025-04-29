@@ -7,8 +7,8 @@
     <style>
         /* Global Styles */
         :root {
-            --primary-color: #0a2463; /* Dark Blue */
-            --accent-color: #ffd100; /* Yellow */
+            --primary-color: #0a2463;
+            --accent-color: #ffd100;
             --text-color: #333;
             --light-text: #fff;
             --bg-light: #f8f9fa;
@@ -16,36 +16,30 @@
             --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
         }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
         }
-        
         body {
             overflow-x: hidden;
             color: var(--text-color);
             background-color: var(--bg-light);
         }
-        
         a {
             text-decoration: none;
             color: inherit;
         }
-        
         ul {
             list-style: none;
         }
-        
         .container {
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
-        
         .btn {
             display: inline-block;
             background-color: var(--accent-color);
@@ -58,24 +52,94 @@
             transition: var(--transition);
             text-align: center;
         }
-        
         .btn:hover {
             background-color: var(--primary-color);
             color: var(--accent-color);
             transform: translateY(-3px);
         }
-        
-        /* Admin Dashboard Styles */
+        /* Header Styles (from products.html) */
+        header {
+            background-color: var(--primary-color);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo h1 {
+            color: var(--light-text);
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        .logo span {
+            color: var(--accent-color);
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            flex: 1;
+        }
+        nav ul {
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: var(--light-text);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: var(--transition);
+        }
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        .admin-btn {
+            color: var(--primary-color);
+            background-color: var(--accent-color);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        .admin-btn:hover {
+            background-color: var(--light-text);
+        }
+        .mobile-menu {
+            display: none;
+            color: var(--light-text);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        /* Orders Page Styles */
         .admin-section {
             padding: 60px 0;
         }
-        
         .admin-container {
             display: grid;
             grid-template-columns: 250px 1fr;
             gap: 30px;
         }
-        
         .admin-sidebar {
             background-color: var(--primary-color);
             color: var(--light-text);
@@ -84,14 +148,12 @@
             box-shadow: var(--shadow);
             height: fit-content;
         }
-        
         .admin-profile {
             text-align: center;
             margin-bottom: 30px;
             padding-bottom: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
-        
         .admin-avatar {
             width: 80px;
             height: 80px;
@@ -100,27 +162,22 @@
             overflow: hidden;
             border: 3px solid var(--accent-color);
         }
-        
         .admin-avatar img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        
         .admin-name {
             font-size: 1.2rem;
             margin-bottom: 5px;
         }
-        
         .admin-role {
             font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255,255,255,0.7);
         }
-        
         .admin-menu ul li {
             margin-bottom: 10px;
         }
-        
         .admin-menu ul li a {
             display: flex;
             align-items: center;
@@ -128,23 +185,19 @@
             border-radius: 8px;
             transition: var(--transition);
         }
-        
         .admin-menu ul li a:hover, .admin-menu ul li a.active {
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: rgba(255,255,255,0.1);
         }
-        
         .admin-menu-icon {
             margin-right: 10px;
             font-size: 1.2rem;
         }
-        
         .admin-content {
             background-color: #fff;
             border-radius: 15px;
             padding: 30px;
             box-shadow: var(--shadow);
         }
-        
         .admin-header {
             display: flex;
             justify-content: space-between;
@@ -153,61 +206,31 @@
             padding-bottom: 20px;
             border-bottom: 1px solid #eee;
         }
-        
         .admin-title {
             font-size: 1.8rem;
             color: var(--primary-color);
         }
-        
         .admin-actions {
             display: flex;
             gap: 10px;
         }
-        
         .admin-table {
             width: 100%;
             border-collapse: collapse;
         }
-        
         .admin-table th, .admin-table td {
             padding: 15px;
             text-align: left;
             border-bottom: 1px solid #eee;
         }
-        
         .admin-table th {
             background-color: var(--bg-light);
             color: var(--primary-color);
             font-weight: 600;
         }
-        
         .admin-table tr:hover {
             background-color: var(--bg-light);
         }
-        
-        .status-badge {
-            display: inline-block;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        
-        .status-pending {
-            background-color: #fff3cd;
-            color: #856404;
-        }
-        
-        .status-delivered {
-            background-color: #d4edda;
-            color: #155724;
-        }
-        
-        .status-cancelled {
-            background-color: #f8d7da;
-            color: #721c24;
-        }
-        
         .action-btn {
             background-color: transparent;
             border: none;
@@ -217,11 +240,9 @@
             transition: var(--transition);
             margin-right: 5px;
         }
-        
         .action-btn:hover {
             color: var(--accent-color);
         }
-        
         /* Modal Styles */
         .modal {
             display: none;
@@ -230,22 +251,20 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: rgba(0,0,0,0.7);
             z-index: 1000;
             align-items: center;
             justify-content: center;
         }
-        
         .modal-content {
             background-color: #fff;
             border-radius: 15px;
             padding: 30px;
             width: 90%;
             max-width: 600px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             position: relative;
         }
-        
         .close-modal {
             position: absolute;
             top: 15px;
@@ -255,86 +274,122 @@
             color: #666;
             transition: var(--transition);
         }
-        
         .close-modal:hover {
             color: var(--primary-color);
         }
-        
-        .modal-header {
-            margin-bottom: 20px;
-        }
-        
         .modal-header h2 {
             font-size: 1.8rem;
             color: var(--primary-color);
         }
-        
-        .order-detail-section {
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .order-detail-section:last-child {
-            border-bottom: none;
-        }
-        
-        .order-detail-section h3 {
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            color: var(--primary-color);
-        }
-        
         .modal-footer {
             margin-top: 20px;
             text-align: right;
         }
-        
+        /* Footer Styles (from products.html) */
+        footer {
+            background-color: var(--bg-dark);
+            color: var(--light-text);
+            padding: 60px 0 20px;
+            margin-top: 60px;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .footer-logo h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        .footer-logo span {
+            color: var(--accent-color);
+        }
+        .footer-col h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+        .footer-col ul li a {
+            transition: var(--transition);
+        }
+        .footer-col ul li a:hover {
+            color: var(--accent-color);
+            padding-left: 5px;
+        }
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
         /* Responsive Styles */
         @media (max-width: 992px) {
             .admin-container {
                 grid-template-columns: 1fr;
             }
-            
             .admin-sidebar {
                 margin-bottom: 30px;
             }
-        }
-        
-        @media (max-width: 768px) {
-            .admin-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
-            }
-            
-            .admin-actions {
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
                 width: 100%;
+                background-color: var(--primary-color);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
             }
-            
-            .admin-table {
-                font-size: 0.9rem;
+            nav ul li {
+                margin: 10px 0;
             }
-            
-            .admin-table th, .admin-table td {
-                padding: 10px;
-            }
-            
-            .admin-table th:nth-child(3),
-            .admin-table td:nth-child(3) {
-                display: none;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .admin-table th:nth-child(5),
-            .admin-table td:nth-child(5) {
-                display: none;
+            .mobile-menu {
+                display: block;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Header Section (from products.html) -->
+    <header>
+        <div class="container header-container">
+            <a href="../index.html" class="logo">
+                <h1>i<span>Food</span></h1>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../index.html#about">About Us</a></li>
+                    <li><a href="../products.html">Menu</a></li>
+                    <li><a href="../contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <a href="dashboard.html" class="admin-btn">Admin</a>
+            <div class="mobile-menu">☰</div>
+        </div>
+    </header>
+
+    <!-- Admin Section -->
     <section class="admin-section">
         <div class="container">
             <div class="admin-container">
@@ -406,42 +461,75 @@
         </div>
     </div>
 
+    <!-- Footer Section (from products.html) -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <h2>i<span>Food</span></h2>
+                    </div>
+                    <p>The best food delivery service in town, bringing your favorite meals right to your doorstep.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../index.html#about">About Us</a></li>
+                        <li><a href="../products.html">Menu</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Refund Policy</a></li>
+                        <li><a href="#">Help</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li>Email: info@ifood.com</li>
+                        <li>Phone: +1 234 567 890</li>
+                        <li>Address: 123 Food Street, Foodville</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 iFood. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
     <script>
-        // Load orders from localStorage
+        // Orders page JavaScript functions (loadOrders, saveOrders, displayOrders, etc.)
         function loadOrders() {
             return JSON.parse(localStorage.getItem('orders')) || [];
         }
-        
-        // Save orders to localStorage
+
         function saveOrders(orders) {
             localStorage.setItem('orders', JSON.stringify(orders));
         }
-        
-        // Display orders
+
         function displayOrders(orders, filter = 'all') {
             const tableBody = document.getElementById('orders-table');
             tableBody.innerHTML = '';
-            
             if (orders.length === 0) {
                 const row = document.createElement('tr');
                 row.innerHTML = '<td colspan="8" style="text-align: center;">No orders found</td>';
                 tableBody.appendChild(row);
                 return;
             }
-            
-            // Filter orders by status if needed
             let filteredOrders = orders;
             if (filter !== 'all') {
                 filteredOrders = orders.filter(order => order.status.toLowerCase() === filter);
             }
-            
-            // Sort orders by date (most recent first)
             filteredOrders.sort((a, b) => new Date(b.date) - new Date(a.date));
-            
             filteredOrders.forEach(order => {
                 const row = document.createElement('tr');
-                
-                // Create status badge class based on status
                 let statusClass = '';
                 switch(order.status.toLowerCase()) {
                     case 'pending':
@@ -456,7 +544,6 @@
                     default:
                         statusClass = 'status-pending';
                 }
-                
                 row.innerHTML = `
                     <td>#${order.order_id}</td>
                     <td>${order.cust_name}</td>
@@ -471,25 +558,20 @@
                         <button class="action-btn delete-btn" data-id="${order.order_id}">🗑️</button>
                     </td>
                 `;
-                
                 tableBody.appendChild(row);
             });
-            
-            // Add event listeners to action buttons
             document.querySelectorAll('.view-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const orderId = parseInt(this.getAttribute('data-id'));
                     viewOrderDetails(orderId);
                 });
             });
-            
             document.querySelectorAll('.edit-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const orderId = parseInt(this.getAttribute('data-id'));
                     editOrderStatus(orderId);
                 });
             });
-            
             document.querySelectorAll('.delete-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const orderId = parseInt(this.getAttribute('data-id'));
@@ -497,16 +579,12 @@
                 });
             });
         }
-        
-        // View order details
+
         function viewOrderDetails(orderId) {
             const orders = loadOrders();
             const order = orders.find(order => order.order_id === orderId);
-            
             if (!order) return;
-            
             const modalContent = document.getElementById('order-details-content');
-            
             modalContent.innerHTML = `
                 <div class="order-detail-section">
                     <h3>Order Information</h3>
@@ -529,84 +607,60 @@
                     <p><strong>Quantity:</strong> ${order.quantity}</p>
                 </div>
             `;
-            
-            // Show modal
             document.getElementById('order-modal').style.display = 'flex';
-            
-            // Set up update status button
             const updateStatusBtn = document.getElementById('update-status-btn');
             updateStatusBtn.setAttribute('data-id', orderId);
             updateStatusBtn.addEventListener('click', function() {
                 editOrderStatus(orderId);
             });
         }
-        
-        // Edit order status
+
         function editOrderStatus(orderId) {
             const orders = loadOrders();
             const orderIndex = orders.findIndex(order => order.order_id === orderId);
-            
             if (orderIndex === -1) return;
-            
             const order = orders[orderIndex];
-            
-            // Ask for new status
             const newStatus = prompt('Update order status (Pending, Delivered, Cancelled):', order.status);
-            
             if (newStatus && ['pending', 'delivered', 'cancelled'].includes(newStatus.toLowerCase())) {
-                // Update order status
                 orders[orderIndex].status = newStatus.charAt(0).toUpperCase() + newStatus.slice(1).toLowerCase();
                 saveOrders(orders);
-                
-                // Refresh orders display
                 const statusFilter = document.getElementById('status-filter').value;
                 displayOrders(orders, statusFilter);
-                
-                // Close modal if open
                 document.getElementById('order-modal').style.display = 'none';
-                
                 alert('Order status updated successfully!');
             } else if (newStatus) {
                 alert('Invalid status. Please use Pending, Delivered, or Cancelled.');
             }
         }
-        
-        // Delete order
+
         function deleteOrder(orderId) {
             if (confirm('Are you sure you want to delete this order?')) {
                 const orders = loadOrders();
                 const updatedOrders = orders.filter(order => order.order_id !== orderId);
-                
                 saveOrders(updatedOrders);
-                
-                // Refresh orders display
                 const statusFilter = document.getElementById('status-filter').value;
                 displayOrders(updatedOrders, statusFilter);
-                
                 alert('Order deleted successfully!');
             }
         }
-        
-        // Close modal
+
         document.getElementById('close-modal').addEventListener('click', function() {
             document.getElementById('order-modal').style.display = 'none';
         });
-        
-        // Close modal when clicking outside
+
         window.addEventListener('click', function(e) {
             const modal = document.getElementById('order-modal');
             if (e.target === modal) {
                 modal.style.display = 'none';
             }
         });
-        
-        // Handle status filter change
+
         document.getElementById('status-filter').addEventListener('change', function() {
             const filter = this.value;
             const orders = loadOrders();
             displayOrders(orders, filter);
         });
-        
+
         // Initialize orders page
         const orders = loadOrders();
         displayOrders(orders);
