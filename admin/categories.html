@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Categories - iFood Admin</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <section class="admin-section">
+        <div class="container">
+            <div class="admin-container">
+                <div class="admin-sidebar">
+                    <div class="admin-profile">
+                        <div class="admin-avatar">
+                            <img src="/placeholder.svg?height=80&width=80" alt="Admin Avatar">
+                        </div>
+                        <h3 class="admin-name">Admin User</h3>
+                        <p class="admin-role">Administrator</p>
+                    </div>
+                    <div class="admin-menu">
+                        <ul>
+                            <li><a href="dashboard.html"><span class="admin-menu-icon">📊</span> Dashboard</a></li>
+                            <li><a href="orders.html"><span class="admin-menu-icon">📦</span> Orders</a></li>
+                            <li><a href="products.html"><span class="admin-menu-icon">🍔</span> Products</a></li>
+                            <li><a href="categories.html" class="active"><span class="admin-menu-icon">📁</span> Categories</a></li>
+                            <li><a href="../index.html"><span class="admin-menu-icon">🏠</span> Back to Website</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="admin-content">
+                    <div class="admin-header">
+                        <h2 class="admin-title">Manage Categories</h2>
+                        <div class="admin-actions">
+                            <button id="add-category-btn" class="btn">Add New Category</button>
+                        </div>
+                    </div>
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Image</th>
+                                <th>Title</th>
+                                <th>Featured</th>
+                                <th>Active</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="categories-table">
+                            <!-- Categories will be loaded dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Form Modal -->
+    <div class="modal" id="category-modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-category-modal">&times;</span>
+            <div class="modal-header">
+                <h2 id="category-form-title">Add New Category</h2>
+            </div>
+            <form id="category-form" class="admin-form">
+                <input type="hidden" id="category-id">
+                <div class="form-group">
+                    <label for="category-title">Title</label>
+                    <input type="text" id="category-title" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="category-image">Image URL</label>
+                    <input type="text" id="category-image" class="form-control" value="/placeholder.svg?height=400&width=600" required>
+                </div>
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="category-featured">
+                    <label for="category-featured">Featured</label>
+                </div>
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="category-active" checked>
+                    <label for="category-active">Active</label>
+                </div>
+                <button type="submit" class="btn">Save Category</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Load categories from localStorage or initialize with default categories
+        function loadCategories() {
+            const storedCategories = localStorage.getItem('admin_categories');
+            if (storedCategories) {
+                return JSON.parse(storedCategories);
+            } else {
+                // Default categories
+                const defaultCategories = [
+                    { id: 1, title: 'Main Course', image: '/placeholder.svg?height=400&width=600', featured: true, active: true },
+                    { id: 2, title: 'Appetizers', image: '/placeholder.svg?height=400&width=600', featured: true, active: true },
+                    { id: 3, title: 'Desserts', image: '/placeholder.svg?height=400&width=600', featured: false, active: true },
+                    { id: 4, title: 'Beverages', image: '/placeholder.svg?height=400&width=600', featured: false, active: true },
+                    { id: 5, title: 'Specials', image: '/placeholder.svg?height=400&width=600', featured: true, active: true }
+                ];
+                localStorage.setItem('admin_categories', JSON.stringify(defaultCategories));
+                return defaultCategories;
+            }
+        }
+        
+        // Save categories to localStorage
+        function saveCategories(categories) {
+            localStorage.setItem('admin_categories', JSON.stringify(categories));
+        }
+        
+        // Display categories
+        function displayCategories() {
+            const categories = loadCategories();
+            const tableBody = document.getElementById('categories-table');
+            tableBody.innerHTML = '';
+            
+            categories.forEach(category => {
+                const row = document.createElement('tr');
+                
+                row.innerHTML = `
+                    <td>${category.id}</td>
+                    <td><img src="${category.image}" alt="${category.title}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;"></td>
+                    <td>${category.title}</td>
+                    <td>${category.featured ? 'Yes' : 'No'}</td>
+                    <td>${category.active ? 'Yes' : 'No'}</td>
+                    <td>
+                        <button class="action-btn edit-category-btn" data-id="${category.id}">✏️</button>
+                        <button class="action-btn delete-category-btn" data-id="${category.id}">🗑️</button>
+                    </td>
+                `;
+                
+                tableBody.appendChild(row);
+            });
+            
+            // Add event listeners to action buttons
+            document.querySelectorAll('.edit-category-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const categoryId = parseInt(this.getAttribute('data-id'));
+                    editCategory(categoryId);
+                });
+            });
+            
+            document.querySelectorAll('.delete-category-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const categoryId = parseInt(this.getAttribute('data-id'));
+                    deleteCategory(categoryId);
+                });
+            });
+        }
+        
+        // Add new category
+        function addCategory() {
+            // Reset form
+            document.getElementById('category-form-title').textContent = 'Add New Category';
+            document.getElementById('category-form').reset();
+            document.getElementById('category-id').value = '';
+            document.getElementById('category-active').checked = true;
+            
+            // Show modal
+            document.getElementById('category-modal').style.display = 'flex';
+        }
+        
+        // Edit category
+        function editCategory(categoryId) {
+            const categories = loadCategories();
+            const category = categories.find(c => c.id === categoryId);
+            
+            if (!category) return;
+            
+            // Set form title
+            document.getElementById('category-form-title').textContent = 'Edit Category';
+            
+            // Fill form with category data
+            document.getElementById('category-id').value = category.id;
+            document.getElementById('category-title').value = category.title;
+            document.getElementById('category-image').value = category.image;
+            document.getElementById('category-featured').checked = category.featured;
+            document.getElementById('category-active').checked = category.active;
+            
+            // Show modal
+            document.getElementById('category-modal').style.display = 'flex';
+        }
+        
+        // Delete category
+        function deleteCategory(categoryId) {
+            if (confirm('Are you sure you want to delete this category?')) {
+                const categories = loadCategories();
+                const updatedCategories = categories.filter(category => category.id !== categoryId);
+                
+                saveCategories(updatedCategories);
+                displayCategories();
+                
+                alert('Category deleted successfully!');
+            }
+        }
+        
+        // Handle form submission
+        document.getElementById('category-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const categoryId = document.getElementById('category-id').value;
+            const categories = loadCategories();
+            
+            const categoryData = {
+                title: document.getElementById('category-title').value,
+                image: document.getElementById('category-image').value,
+                featured: document.getElementById('category-featured').checked,
+                active: document.getElementById('category-active').checked
+            };
+            
+            if (categoryId) {
+                // Update existing category
+                const index = categories.findIndex(c => c.id === parseInt(categoryId));
+                if (index !== -1) {
+                    categories[index] = { ...categories[index], ...categoryData };
+                }
+            } else {
+                // Add new category
+                const newId = categories.length > 0 ? Math.max(...categories.map(c => c.id)) + 1 : 1;
+                categories.push({
+                    id: newId,
+                    ...categoryData
+                });
+            }
+            
+            saveCategories(categories);
+            displayCategories();
+            
+            // Close modal
+            document.getElementById('category-modal').style.display = 'none';
+            
+            alert(categoryId ? 'Category updated successfully!' : 'Category added successfully!');
+        });
+        
+        // Add category button
+        document.getElementById('add-category-btn').addEventListener('click', addCategory);
+        
+        // Close modal
+        document.getElementById('close-category-modal').addEventListener('click', function() {
+            document.getElementById('category-modal').style.display = 'none';
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            const modal = document.getElementById('category-modal');
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+        
+        // Initialize categories page
+        displayCategories();
+    </script>
+</body>
+</html>

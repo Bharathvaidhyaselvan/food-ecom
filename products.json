@@ -1,0 +1,98 @@
+[
+    {
+      "id": 1,
+      "title": "Margherita Pizza",
+      "description": "Classic pizza with tomato sauce, mozzarella cheese, and fresh basil leaves.",
+      "price": 12.99,
+      "rating": 4.5,
+      "image": "/placeholder.svg?height=400&width=600"
+    },
+    {
+      "id": 2,
+      "title": "Chicken Alfredo Pasta",
+      "description": "Creamy alfredo sauce with grilled chicken and fettuccine pasta.",
+      "price": 14.99,
+      "rating": 4.7,
+      "image": "/placeholder.svg?height=400&width=600"
+    },
+    {
+      "id": 3,
+      "title": "Beef Burger",
+      "description": "Juicy beef patty with cheese, lettuce, tomato, and special sauce on a brioche bun.",
+      "price": 10.99,
+      "rating": 4.6,
+      "image": "/placeholder.svg?height=400&width=600"
+    },
+    {
+      "id": 4,
+      "title": "Vegetable Stir Fry",
+      "description": "Fresh vegetables stir-fried with tofu in a savory sauce, served with steamed rice.",
+      "price": 11.99,
+      "rating": 4.3,
+      "image": "/placeholder.svg?height=400&width=600"
+    },
+    {
+      "id": 5,
+      "title": "Grilled Salmon",
+      "description": "Fresh salmon fillet grilled to perfection, served with seasonal vegetables.",
+      "price": 16.99,
+      "rating": 4.8,
+      "image": "/placeholder.svg?height=400&width=600"
+    },
+    {
+      "id": 6,
+      "title": "Caesar Salad",
+      "description": "Crisp romaine lettuce with Caesar dressing, croutons, and parmesan cheese.",
+      "price": 8.99,
+      "rating": 4.2,
+      "image": "/placeholder.svg?height=400&width=600"
+    },
+    {
+      "id": 7,
+      "title": "Chicken Biryani",
+      "description": "Fragrant basmati rice cooked with tender chicken pieces and aromatic spices.",
+      "price": 13.99,
+      "rating": 4.7,
+      "image": "/placeholder.svg?height=400&width=600"
+    },
+    {
+      "id": 8,
+      "title": "Mushroom Risotto",
+      "description": "Creamy Italian rice dish cooked with mushrooms, white wine, and parmesan cheese.",
+      "price": 12.49,
+      "rating": 4.4,
+      "image": "/placeholder.svg?height=400&width=600"
+    },
+    {
+      "id": 9,
+      "title": "Fish and Chips",
+      "description": "Crispy battered fish served with golden fries and tartar sauce.",
+      "price": 11.49,
+      "rating": 4.3,
+      "image": "/placeholder.svg?height=400&width=600"
+    },
+    {
+      "id": 10,
+      "title": "Chocolate Lava Cake",
+      "description": "Warm chocolate cake with a molten chocolate center, served with vanilla ice cream.",
+      "price": 6.99,
+      "rating": 4.9,
+      "image": "/placeholder.svg?height=400&width=600"
+    },
+    {
+      "id": 11,
+      "title": "Chicken Shawarma",
+      "description": "Marinated chicken wrapped in pita bread with garlic sauce and fresh vegetables.",
+      "price": 9.99,
+      "rating": 4.5,
+      "image": "/placeholder.svg?height=400&width=600"
+    },
+    {
+      "id": 12,
+      "title": "Vegetable Lasagna",
+      "description": "Layers of pasta, vegetables, tomato sauce, and cheese baked to perfection.",
+      "price": 13.49,
+      "rating": 4.4,
+      "image": "/placeholder.svg?height=400&width=600"
+    }
+  ]

@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - iFood</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #0a2463; /* Dark Blue */
+            --accent-color: #ffd100; /* Yellow */
+            --text-color: #333;
+            --light-text: #fff;
+            --bg-light: #f8f9fa;
+            --bg-dark: #0a1a3a;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            overflow-x: hidden;
+            color: var(--text-color);
+            background-color: var(--bg-light);
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            font-weight: 600;
+            padding: 10px 25px;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-color);
+            color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--primary-color);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo h1 {
+            color: var(--light-text);
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: var(--accent-color);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: center;
+            flex: 1;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+        }
+        
+        nav ul li {
+            margin: 0 15px;
+        }
+        
+        nav ul li a {
+            color: var(--light-text);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: var(--transition);
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .admin-btn {
+            color: var(--primary-color);
+            background-color: var(--accent-color);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .admin-btn:hover {
+            background-color: var(--light-text);
+        }
+        
+        .mobile-menu {
+            display: none;
+            color: var(--light-text);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Checkout Page Styles */
+        .checkout-section {
+            padding: 60px 0;
+        }
+        
+        .checkout-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--primary-color);
+            position: relative;
+        }
+        
+        .checkout-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+        }
+        
+        .checkout-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+        }
+        
+        .checkout-section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        .order-summary {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .product-details {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .product-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-right: 20px;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .product-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+        
+        .product-rating {
+            color: var(--accent-color);
+            margin-bottom: 5px;
+        }
+        
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+        
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .payment-options {
+            margin-bottom: 30px;
+        }
+        
+        .payment-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .payment-option input {
+            margin-right: 10px;
+        }
+        
+        .razorpay-message {
+            display: none;
+            color: #e74c3c;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #fdecea;
+            border-radius: 5px;
+        }
+        
+        .checkout-btn {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1rem;
+        }
+        
+        /* Order Confirmation Styles */
+        .order-confirmation {
+            display: none;
+            background-color: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            margin-top: 30px;
+        }
+        
+        .order-confirmation h2 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .order-details h3, .customer-details h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .customer-info {
+            margin-bottom: 5px;
+        }
+        
+        .success-message {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #d4edda;
+            color: #155724;
+            border-radius: 5px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .checkout-title {
+                font-size: 2rem;
+            }
+            
+            .product-image {
+                width: 60px;
+                height: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <h1>i<span>Food</span></h1>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#about">About Us</a></li>
+                    <li><a href="products.html">Menu</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <a href="admin/dashboard.html" class="admin-btn">Admin</a>
+            <div class="mobile-menu">☰</div>
+        </div>
+    </header>
+
+    <!-- Checkout Section -->
+    <section class="checkout-section">
+        <div class="container">
+            <h1 class="checkout-title">Checkout</h1>
+            <div class="checkout-container">
+                <div class="order-summary">
+                    <h2 class="checkout-section-title">Order Summary</h2>
+                    <div id="product-details-container">
+                        <!-- Product details will be loaded dynamically -->
+                    </div>
+                </div>
+                <div class="delivery-info">
+                    <h2 class="checkout-section-title">Delivery Information</h2>
+                    <form id="checkout-form">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Delivery Address</label>
+                            <textarea id="address" class="form-control" required></textarea>
+                        </div>
+                        <div class="payment-options">
+                            <h3 class="checkout-section-title">Payment Method</h3>
+                            <div class="payment-option">
+                                <input type="radio" id="cod" name="payment" value="cod" checked>
+                                <label for="cod">Cash on Delivery</label>
+                            </div>
+                            <div class="payment-option">
+                                <input type="radio" id="razorpay" name="payment" value="razorpay">
+                                <label for="razorpay">Razorpay</label>
+                            </div>
+                            <div id="razorpay-message" class="razorpay-message">
+                                Oops! Razorpay is not enabled.
+                            </div>
+                        </div>
+                        <button type="submit" class="btn checkout-btn">Complete Order</button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Order Confirmation -->
+            <div class="order-confirmation" id="order-confirmation">
+                <h2>Order Confirmed!</h2>
+                <div class="order-details">
+                    <h3>Order Details</h3>
+                    <div id="confirmation-product-details">
+                        <!-- Product details will be loaded dynamically -->
+                    </div>
+                </div>
+                <div class="customer-details">
+                    <h3>Delivery Information</h3>
+                    <div id="confirmation-customer-details">
+                        <!-- Customer details will be loaded dynamically -->
+                    </div>
+                </div>
+                <div class="success-message">
+                    Your order has been placed successfully. Thank you for choosing iFood!
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+
+
+    <script>
+        // Mobile menu functionality
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navMenu = document.querySelector('nav ul');
+        
+        mobileMenu.addEventListener('click', function() {
+            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+        });
+        
+        // Get product ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id');
+        let selectedProduct = null;
+        
+        // Fetch product details
+        fetch('products.json')
+            .then(response => response.json())
+            .then(data => {
+                selectedProduct = data.find(product => product.id === parseInt(productId));
+                
+                if (selectedProduct) {
+                    displayProductDetails(selectedProduct);
+                } else {
+                    window.location.href = 'products.html';
+                }
+            })
+            .catch(error => console.error('Error loading product:', error));
+        
+        // Display product details
+        function displayProductDetails(product) {
+            const container = document.getElementById('product-details-container');
+            
+            // Create rating stars
+            let stars = '';
+            for (let i = 1; i <= 5; i++) {
+                if (i <= product.rating) {
+                    stars += '★';
+                } else {
+                    stars += '☆';
+                }
+            }
+            
+            container.innerHTML = `
+                <div class="product-details">
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.title}">
+                    </div>
+                    <div class="product-info">
+                        <h3>${product.title}</h3>
+                        <div class="product-rating">${stars} (${product.rating})</div>
+                        <div class="product-price">$${product.price.toFixed(2)}</div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Handle payment method selection
+        const razorpayRadio = document.getElementById('razorpay');
+        const razorpayMessage = document.getElementById('razorpay-message');
+        
+        razorpayRadio.addEventListener('change', function() {
+            if (this.checked) {
+                razorpayMessage.style.display = 'block';
+            }
+        });
+        
+        document.getElementById('cod').addEventListener('change', function() {
+            if (this.checked) {
+                razorpayMessage.style.display = 'none';
+            }
+        });
+        
+        // Handle form submission
+        const checkoutForm = document.getElementById('checkout-form');
+        const orderConfirmation = document.getElementById('order-confirmation');
+        
+        checkoutForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+            const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+            
+            if (paymentMethod === 'razorpay') {
+                razorpayMessage.style.display = 'block';
+                return;
+            }
+            
+            // Create order object
+            const order = {
+                order_id: Date.now(),
+                food_title: selectedProduct.title,
+                cat_id: 1, // Assuming a default category
+                price: selectedProduct.price,
+                quantity: 1,
+                total: selectedProduct.price,
+                date: new Date().toISOString().split('T')[0],
+                status: 'Pending',
+                cust_name: name,
+                cust_mail: email,
+                cust_contact: phone,
+                cust_address: address
+            };
+            
+            // Save order to localStorage
+            saveOrder(order);
+            
+            // Display order confirmation
+            const confirmationProductDetails = document.getElementById('confirmation-product-details');
+            confirmationProductDetails.innerHTML = `
+                <div class="order-item">
+                    <span>${selectedProduct.title}</span>
+                    <span>$${selectedProduct.price.toFixed(2)}</span>
+                </div>
+                <div class="order-item">
+                    <strong>Total</strong>
+                    <strong>$${selectedProduct.price.toFixed(2)}</strong>
+                </div>
+            `;
+            
+            const confirmationCustomerDetails = document.getElementById('confirmation-customer-details');
+            confirmationCustomerDetails.innerHTML = `
+                <p class="customer-info"><strong>Name:</strong> ${name}</p>
+                <p class="customer-info"><strong>Email:</strong> ${email}</p>
+                <p class="customer-info"><strong>Phone:</strong> ${phone}</p>
+                <p class="customer-info"><strong>Address:</strong> ${address}</p>
+                <p class="customer-info"><strong>Payment Method:</strong> Cash on Delivery</p>
+            `;
+            
+            // Hide checkout form and show confirmation
+            document.querySelector('.checkout-container').style.display = 'none';
+            orderConfirmation.style.display = 'block';
+            
+            // Scroll to confirmation
+            orderConfirmation.scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        // Save order to localStorage
+        function saveOrder(order) {
+            let orders = JSON.parse(localStorage.getItem('orders')) || [];
+            orders.push(order);
+            localStorage.setItem('orders', JSON.stringify(orders));
+        }
+    </script>
+</body>
+</html>
+    <script>
+        // Load footer
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            });
+    </script>
